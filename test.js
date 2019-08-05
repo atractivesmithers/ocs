@@ -1,5 +1,7 @@
 let {
     endsWithEnding,
+    startsWithBeginning,
+    makeInfinitiveVerbGerund,
 } = require('./utils');
 
 const assert = ({name, val, expected}) => {
@@ -14,6 +16,49 @@ const assert = ({name, val, expected}) => {
         console.error(`Expected value ${expected}, got value ${actual}`);
     }
 }
+
+// makeInfinitiveVerbGerund //
+
+assert({
+    name: 'make comer gerund',
+    val: () => makeInfinitiveVerbGerund('comer'),
+    expected: 'comiendo',
+});
+assert({
+    name: 'make untar gerund',
+    val: () => makeInfinitiveVerbGerund('untar'),
+    expected: 'untando',
+});
+assert({
+    name: 'make hundir gerund',
+    val: () => makeInfinitiveVerbGerund('hundir'),
+    expected: 'hundiendo',
+});
+assert({
+    name: 'make mentir gerund',
+    val: () => makeInfinitiveVerbGerund('mentir'),
+    expected: 'mintiendo',
+});
+assert({
+    name: 'make rendir gerund',
+    val: () => makeInfinitiveVerbGerund('rendir'),
+    expected: 'rindiendo',
+});
+assert({
+    name: 'make pedir gerund',
+    val: () => makeInfinitiveVerbGerund('pedir'),
+    expected: 'pidiendo',
+});
+assert({
+    name: 'make venir gerund',
+    val: () => makeInfinitiveVerbGerund('venir'),
+    expected: 'viniendo',
+});
+assert({
+    name: 'make ballear gerund',
+    val: () => makeInfinitiveVerbGerund('ballear'),
+    expected: 'ballin\'',
+});
 
 // endsWithEnding //
 
@@ -50,5 +95,43 @@ assert({
 assert({
     name: 'doesnt explode when ending is empty',
     val: () => endsWithEnding({word: 'a', ending: null}),
+    expected: false,
+});
+
+// startsWithBeginning //
+
+assert({
+    name: 'doesnt begin with single char',
+    val: () => startsWithBeginning({word: 'perro', beginning: 'g'}),
+    expected: false,
+});
+assert({
+    name: 'doesnt begin with with multiple chars',
+    val: () => startsWithBeginning({word: 'perro', beginning: 'po'}),
+    expected: false,
+});
+assert({
+    name: 'begins with single char',
+    val: () => startsWithBeginning({word: 'perro', beginning: 'p'}),
+    expected: true,
+});
+assert({
+    name: 'begins with multiple chars',
+    val: () => startsWithBeginning({word: 'perro', beginning: 'pe'}),
+    expected: true,
+});
+assert({
+    name: 'doesnt explode when beginning longer than word',
+    val: () => startsWithBeginning({word: 'pe', beginning: 'perro'}),
+    expected: false,
+});
+assert({
+    name: 'doesnt explode when word is empty',
+    val: () => startsWithBeginning({word: null, beginning: 'a'}),
+    expected: false,
+});
+assert({
+    name: 'doesnt explode when beginning is empty',
+    val: () => startsWithBeginning({word: 'a', beginning: null}),
     expected: false,
 });

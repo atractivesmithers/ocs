@@ -10,10 +10,13 @@ let {
     diminutive,
     eo,
     getRandomNumber,
+    getElementWithGender,
+    makeInfinitiveVerbGerund,
 } = require('./utils');
 
 const generateVerbGerund = ({happenings}) => {
-    let verbGerund = getUniqueElement({ happenings, type: 'verbGerund' });
+    let verbInfinitive = getUniqueElement({ happenings, type: 'verbInfinitive' });
+    let verbGerund = makeInfinitiveVerbGerund(verbInfinitive);
     if (withProbability(0.3)) {
     	if (withProbability(0.6)) {
 	        let verbParticle = getUniqueElement({ happenings, type: 'verbParticle' });
@@ -70,10 +73,8 @@ const generateSustantive = ({happenings, gender, doPluralize}) => {
         sustantive = getUniqueElement({ happenings, type: 'sustantive' });
         sustantiveGender = getGender(sustantive);
     } else {
-        while (sustantiveGender !== gender) { // TODO: optimize with new method that gets sustantive of whatever gender
-            sustantive = getUniqueElement({ happenings, type: 'sustantive' });
-            sustantiveGender = getGender(sustantive);
-        }
+        sustantive = getElementWithGender({ happenings, gender, type: 'sustantive'});
+        sustantiveGender = gender;
     }
     sustantive = getGenderedElement({ gender: sustantiveGender, element: sustantive });
     let doDiminutive = withProbability(0.05);
@@ -143,10 +144,8 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
         adjective = getUniqueElement({ happenings, type: 'adjective' });
         adjectiveGender = getGender(adjective);
     } else {
-        while (adjectiveGender !== gender) { // TODO: optimize with new method that gets sustantive of whatever gender
-            adjective = getUniqueElement({ happenings, type: 'adjective' });
-            adjectiveGender = getGender(adjective);
-        }
+        adjective = getElementWithGender({ happenings, gender, type: 'adjective'});
+        adjectiveGender = gender;
     }
     adjective = getGenderedElement({ gender: adjectiveGender, element: adjective });
     let doDiminutive = withProbability(0.05);
@@ -178,10 +177,8 @@ const generateAdverb = ({happenings}) => {
     } else if (mente) {
         let adjective;
         let adjectiveGender;
-        while (adjectiveGender !== 'f') { // TODO: optimize with new method that gets sustantive of whatever gender
-            adjective = getUniqueElement({ happenings, type: 'adjective' });
-            adjectiveGender = getGender(adjective);
-        }
+        adjective = getElementWithGender({ happenings, gender: 'f', type: 'adjective'});
+        adjectiveGender = 'f';
         adjective = getGenderedElement({ gender: 'f', element: adjective });
         adverb = `${adjective}mente`;
     } else {

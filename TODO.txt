@@ -1,2 +1,3 @@
 - translate ocs to different languages using some translation api (20% ?)
--
+- function to convert infinitive verbs to gerund verbs
+- split utils into utils for different gramatical elements

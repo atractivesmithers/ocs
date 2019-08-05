@@ -18,11 +18,25 @@ const endsWithEnding = ({word, ending}) => {
     }
     return true;
 }
+const startsWithBeginning = ({word, beginning}) => {
+    if (typeof word !== 'string') return false;
+    if (typeof beginning !== 'string') return false;
+    if (word.length < beginning.length) return false;
+    for (let i = 0; i < beginning.length; i++) {
+        const wordChar = word[i];
+        const beginningChar = beginning[i];
+        if (wordChar !== beginningChar) return false;
+    }
+    return true;
+}
 const removeFirstChar = word => {
     return word.substr(1);
 }
+const removeLastNChars = ({word, n}) => {
+	return word.slice(0, -n);
+}
 const removeLastChar = word => {
-	return word.slice(0, -1);
+    return removeLastNChars({word, n:1});
 }
 const nthLastChar = ({ word, n }) => {
     return word[word.length-n];
@@ -73,13 +87,11 @@ const diminutive = ({ word, gender }) => {
         return `${word}c${ending}`;
     }
     if (nthLastCharIs({ word, char:'i', n: 2 }) || nthLastCharIs({ word, char:'z', n: 2 })) {
-        word = removeLastChar(word);
-        word = removeLastChar(word);
+        word = removeLastNChars({word, n: 2});
         return `${word}c${ending}`;
     }
     if (nthLastCharIs({ word, char:'c', n: 2 })) {
-        word = removeLastChar(word);
-        word = removeLastChar(word);
+        word = removeLastNChars({word, n: 2});
         return `${word}qu${ending}`;
     }
     return `${endsWithVocal(word) ? removeLastChar(word) : word}${ending}`;
@@ -95,20 +107,19 @@ const eo = word => {
         return `${word}`;
     }
     if (nthLastCharIs({ word, char:'c', n: 2 })) {
-        word = removeLastChar(word);
-        word = removeLastChar(word);
+        word = removeLastNChars({word, n: 2});
         return `${word}qu${ending}`;
     }
     word = removeTilde(word);
     return `${endsWithVocal(word) ? removeLastChar(word) : word}${ending}`;
 }
 
-let getRandomItem = arr => {
+const getRandomItem = arr => {
     let randomIndex = Math.floor(Math.random()*arr.length);
     return arr[randomIndex];
 }
 
-let getUniqueElement = ({ happenings, type }) => {
+const getUniqueElement = ({ happenings, type }) => {
     let element = getRandomItem(words[type]);
     while (happenings.indexOf(element) > -1) {
         happenings.push(element);
@@ -118,21 +129,21 @@ let getUniqueElement = ({ happenings, type }) => {
     return element;
 }
 
-let withProbability = probability => {
+const withProbability = probability => {
     return Math.random() < probability;
 }
 
-let genders = ['m', 'f'];
-let getGender = (element) => {
+const genders = ['m', 'f'];
+const getGender = (element) => {
     let gender = element.match(/\(([^)]+)\)/);
     if (gender && (gender[1] === 'm' || gender[1] === 'f')) return gender[1];
     return getRandomGender();
 }
-let getRandomGender = () => {
+const getRandomGender = () => {
     return getRandomItem(genders);
 }
 
-let getGenderedElement = ({ gender, element }) => {
+const getGenderedElement = ({ gender, element }) => {
     let endings = element.match(/\(([^)]+)\)/);
     let word = element.split('(')[0];
     let ending = '';
@@ -147,8 +158,49 @@ let getGenderedElement = ({ gender, element }) => {
     return `${word}${ending}`;
 }
 
+const getElementWithGender = ({ happenings, gender, type }) => {
+    let elementGender;
+    let element;
+    while (elementGender !== gender) {
+        element = getUniqueElement({ happenings, type: type });
+        elementGender = getGender(element);
+    }
+    return element;
+}
+
 const getRandomNumber = () => {
     return getRandomItem(['dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve']);
+}
+
+const replaceAt = ({word, i, replacement}) => {
+    return word.substr(0, i) + replacement + word.substr(i + replacement.length);
+}
+
+const makeInfinitiveVerbGerund = verb => {
+    const irregulars = {
+        wildear: 'wildin\'',
+        booliar: 'boolin\'',
+        ballear: 'ballin\'',
+        ir: 'yendo',
+    };
+    if (irregulars[verb]) return irregulars[verb];
+    if (endsWithEnding({word: verb, ending: 'er'})) {
+        verb = removeLastNChars({word: verb, n: 2});
+        return `${verb}iendo`;
+    }
+    if (endsWithEnding({word: verb, ending: 'ar'})) {
+        verb = removeLastChar(verb);
+        return `${verb}ndo`;
+    }
+    if (endsWithEnding({word: verb, ending: 'ir'})) {
+        verb = removeLastChar(verb);
+        if (verb[1] === 'e') {
+            verb = replaceAt({word: verb, i: 1, replacement: 'i'});
+        }
+        return `${verb}endo`;
+    }
+    verb = removeLastNChars({word: verb, n: 2});
+    return `${verb}ando`;
 }
 
 module.exports = {
@@ -165,4 +217,7 @@ module.exports = {
     getRandomNumber,
     capitalizeFirstLetter,
     endsWithEnding,
+    getElementWithGender,
+    makeInfinitiveVerbGerund,
+    startsWithBeginning,
 };

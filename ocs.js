@@ -59,7 +59,7 @@ let structures = [
         name: 'basico5',
         components: [
             {type:'article', probability: 1},
-            {type:'adjective', probability: 1},
+            {type:'adjective', probability: 1}, // TODO: gender issues
             {type:'sustantive', probability: 1},
         ]
     },
