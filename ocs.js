@@ -103,7 +103,7 @@ let structures = [
     {
         name: 'novia11', // TODO: no concuerda??
         components: [
-            {literal:'que a tu novia la conozcan en el barrio como', probability: 0.3},
+            {literal:'que a tu novia la conozcan en el barrio como', probability: 1},
             {name:'basico10', probability: 1},
         ]
     }
@@ -111,19 +111,18 @@ let structures = [
 
 let happenings = [];
 
-let generateOc = structure => {
+let generateOc = ({structure, gender, doPluralize}) => {
     const { components } = structure;
     let oc = '';
-    let gender = getRandomGender();
+    gender = gender ? gender : getRandomGender();
     happenings = [];
-    let doPluralize;
     let isFirstComponent = true;
     for ({ type, probability, literal, name, random, options, caseData, restartGender } of components) {
         let element;
         if (withProbability(probability)) {
             if (random) {
                 let option = getRandomItem(options);
-                let randomOc = generateOc(structures[option]);
+                let randomOc = generateOc({structure: structures[option], gender, doPluralize});
                 if (isFirstComponent) {
                     oc = randomOc;
                 } else {
@@ -132,7 +131,7 @@ let generateOc = structure => {
             } else if (name) {
                 let foundStructure = structures.find(s => s.name === name);
                 if (foundStructure) {
-                    let generatedOc = generateOc(foundStructure);
+                    let generatedOc = generateOc({structure: foundStructure, gender, doPluralize});
                     if (isFirstComponent) {
                         oc = generatedOc;
                     } else {
@@ -212,7 +211,7 @@ let allowedStructures = [
 
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
-    let result = `${randomType} ${generateOc(structures[randomType])}`;
+    let result = `${randomType} ${generateOc({structure: structures[randomType]})}`;
     console.log(result);
 }
 
