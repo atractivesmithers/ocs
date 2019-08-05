@@ -7,6 +7,9 @@ const endsWithVocal = word => isVocal(lastChar(word));
 const hasTilde = char => {
     return ['á','é','í','ó','ú'].indexOf(char) > -1;
 }
+const removeFirstChar = word => {
+    return word.substr(1);
+}
 const removeLastChar = word => {
 	return word.slice(0, -1);
 }
@@ -69,6 +72,10 @@ const diminutive = ({ word, gender }) => {
         return `${word}qu${ending}`;
     }
     return `${endsWithVocal(word) ? removeLastChar(word) : word}${ending}`;
+}
+
+const capitalizeFirstLetter = word => {
+    return `${word[0].toUpperCase()}${removeFirstChar(word)}`;
 }
 
 const eo = word => {
@@ -145,4 +152,5 @@ module.exports = {
 	diminutive,
     eo,
     getRandomNumber,
+    capitalizeFirstLetter,
 };

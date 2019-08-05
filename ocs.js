@@ -4,6 +4,7 @@ let {
     getUniqueElement,
     withProbability,
     getRandomGender,
+    capitalizeFirstLetter,
 } = require('./utils');
 let words = require('./data');
 let {
@@ -211,7 +212,7 @@ let allowedStructures = [
 
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
-    let result = `${randomType} ${generateOc({structure: structures[randomType]})}`;
+    let result = `${randomType} ${capitalizeFirstLetter(generateOc({structure: structures[randomType]}))}`;
     console.log(result);
 }
 

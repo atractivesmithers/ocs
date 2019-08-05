@@ -1,0 +1,2 @@
+- translate ocs to different languages using some translation api (20% ?)
+-
