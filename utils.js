@@ -7,6 +7,17 @@ const endsWithVocal = word => isVocal(lastChar(word));
 const hasTilde = char => {
     return ['á','é','í','ó','ú'].indexOf(char) > -1;
 }
+const endsWithEnding = ({word, ending}) => {
+    if (typeof word !== 'string') return false;
+    if (typeof ending !== 'string') return false;
+    if (word.length < ending.length) return false;
+    for (let i = 1; i <= ending.length; i++) {
+        const wordChar = nthLastChar({word, n:i});
+        const endingChar = nthLastChar({word: ending, n:i});
+        if (wordChar !== endingChar) return false;
+    }
+    return true;
+}
 const removeFirstChar = word => {
     return word.substr(1);
 }
@@ -153,4 +164,5 @@ module.exports = {
     eo,
     getRandomNumber,
     capitalizeFirstLetter,
+    endsWithEnding,
 };
