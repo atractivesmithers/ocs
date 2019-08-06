@@ -12,6 +12,8 @@ let {
     getRandomNumber,
     getElementWithGender,
     makeInfinitiveVerbGerund,
+    diz,
+    addRandomLevel,
 } = require('./utils');
 
 const generateVerbGerund = ({happenings}) => {
@@ -78,7 +80,6 @@ const generateSustantive = ({happenings, gender, doPluralize}) => {
     }
     sustantive = getGenderedElement({ gender: sustantiveGender, element: sustantive });
     let doDiminutive = withProbability(0.05);
-    // let doDiminutive = withProbability(1);
     if (doDiminutive) {
         sustantive = diminutive({word: sustantive, gender: sustantiveGender});
     }
@@ -96,7 +97,6 @@ const generateSustantive = ({happenings, gender, doPluralize}) => {
     	sustantiveGender,
     	isPlural: doPluralize,
     };
-    // TODO: generate -eo sustantives (sustantive+eo)
 }
 
 const generateArticle = ({ gender, doPluralize, concrete }) => {
@@ -140,6 +140,22 @@ const generateArticle = ({ gender, doPluralize, concrete }) => {
 const generateAdjective = ({happenings, gender, doPluralize}) => {
     let adjective;
     let adjectiveGender;
+    let doLevel = withProbability(0.1);
+    doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.1);
+    let isDizo = withProbability(0.1);
+    if (isDizo) {
+        adjectiveGender = gender || getRandomGender();
+        let verb = getUniqueElement({ happenings, type: 'verbInfinitive' });
+        adjective = diz({ verb, gender: adjectiveGender, doPluralize });
+        if (doLevel) {
+            adjective = addRandomLevel(adjective);
+        }
+        return {
+            adjective,
+            adjectiveGender,
+            isPlural: doPluralize,
+        };
+    }
     if (!gender) {
         adjective = getUniqueElement({ happenings, type: 'adjective' });
         adjectiveGender = getGender(adjective);
@@ -152,9 +168,11 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
     if (doDiminutive) {
         adjective = diminutive({word: adjective, gender: adjectiveGender});
     }
-    doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.1);
     if (doPluralize) {
         adjective = pluralize(adjective);
+    }
+    if (doLevel) {
+        adjective = addRandomLevel(adjective);
     }
     return {
         adjective,

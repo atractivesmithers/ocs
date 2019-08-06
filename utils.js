@@ -203,6 +203,37 @@ const makeInfinitiveVerbGerund = verb => {
     return `${verb}ando`;
 }
 
+const isWhitespace = char => ' \t\n\r\v'.indexOf(char) > -1;
+
+const mangleWord = ({ word, intensity }) => {
+    const characters       = 'abcdefghijklmnopqrstuvwxyz';
+    const charactersLength = characters.length;
+    const wordLength       = word.length;
+    for (let i = 0; i < intensity; i++) {
+        let randomCharacter = ' ';
+        while (isWhitespace(randomCharacter)) {
+            let randomCharacterIndex = Math.floor(Math.random() * charactersLength);
+            randomCharacter = characters[randomCharacterIndex];
+        }
+        let randomIndex = Math.floor(Math.random() * wordLength);
+        word = replaceAt({ word, i: randomIndex, replacement: randomCharacter });
+    }
+    return word;
+}
+
+const diz = ({verb, gender, doPluralize}) => {
+    let ending = `diz${gender === 'm' ? 'o' : 'a'}${doPluralize ? 's' : ''}`;
+    return `${removeLastChar(verb)}${ending}`;
+}
+
+const getRandomLevel = () => {
+    return getUniqueElement({ happenings: [], type: 'level' });
+}
+
+const addRandomLevel = adjective => {
+    return `${getRandomLevel()} ${adjective}`;
+}
+
 module.exports = {
 	isVocal,
 	pluralize,
@@ -220,4 +251,8 @@ module.exports = {
     getElementWithGender,
     makeInfinitiveVerbGerund,
     startsWithBeginning,
+    mangleWord,
+    diz,
+    getRandomLevel,
+    addRandomLevel,
 };

@@ -18,7 +18,7 @@ let sustantive = [
     'Wallapop(m)', 'Mentos(m)', 'huella(f)', 'manguera(f)', 'clan(m)', 'buga(m)', 'gube(m)',
     'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'gruñolo(m)', 'bagule(m)', 'bugaléy(m)',
     'boño(m)', 'bamba(f)', 'fieltro(m)', 'baya(f)', 'nata(f)', 'gesto(m)', 'anochecer(m)',
-    'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)'
+    'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -70,6 +70,9 @@ let adverb = [
 let adverbParticle = [
     'a lo', 'cual'
 ];
+let level = [
+    'muy', 'poco', 'ligeramente', 'extremadamente', 'intensamente', 'sorprendentemente',
+];
 
 let words = {
     sustantive,
@@ -79,6 +82,7 @@ let words = {
     verbInfinitive,
     verbParticle,
     adverbParticle,
+    level,
 };
 
 module.exports = words;

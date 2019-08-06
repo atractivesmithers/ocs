@@ -5,6 +5,7 @@ let {
     withProbability,
     getRandomGender,
     capitalizeFirstLetter,
+    mangleWord,
 } = require('./utils');
 let words = require('./data');
 let {
@@ -212,7 +213,11 @@ let allowedStructures = [
 
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
-    let result = `${randomType} ${capitalizeFirstLetter(generateOc({structure: structures[randomType]}))}`;
+    let generatedOc = generateOc({structure: structures[randomType]});
+    if (withProbability(0.01)) {
+        generatedOc = mangleWord({ word: generatedOc, intensity: 5 });
+    }
+    let result = `${randomType} ${capitalizeFirstLetter(generatedOc)}`;
     console.log(result);
 }
 
