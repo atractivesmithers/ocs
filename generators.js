@@ -15,6 +15,7 @@ let {
     diz,
     addRandomLevel,
     te,
+    mangleWord,
 } = require('./utils');
 
 const generateVerbGerund = ({happenings}) => {
@@ -237,6 +238,20 @@ const generateAdverb = ({happenings}) => {
     return adverb;
 }
 
+const generateGube = () => {
+    let happenings = [];
+    let gubeLength = getRandomItem([1,2,2,2,3]);
+    let gube = '';
+    for (let i = 0; i < gubeLength; i++) {
+        gube += getUniqueElement({ happenings, type: 'gube' });
+    }
+    if (withProbability(0.2)) {
+        generatedOc = mangleWord({ word: gube, intensity: 5 });
+    }
+    let gubeEnding = getUniqueElement({ happenings, type: 'gubeEnding' });
+    return `${gube}${gubeEnding}`;
+}
+
 module.exports = {
 	generateVerbGerund,
 	generateSustantivizedAdjective,
@@ -245,4 +260,5 @@ module.exports = {
     generateAdjective,
     generateAdverb,
     generateVerbTe,
+    generateGube,
 };

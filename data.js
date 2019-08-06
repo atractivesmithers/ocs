@@ -16,11 +16,11 @@ let sustantive = [
     'emo(m)', 'cinturón(m)', 'Vodafone(m)', 'estornudo(m)', 'gnomo(m)', 'petanca(m)',
     'substancia(f)', 'gramo(m)', 'arcilla(f)', 'sabor(m)', 'rave(f)', 'pepa(f)', 'Nespresso(m)',
     'Wallapop(m)', 'Mentos(m)', 'huella(f)', 'manguera(f)', 'clan(m)', 'buga(m)', 'gube(m)',
-    'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'gruñolo(m)', 'bagule(m)', 'bugaléy(m)',
+    'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'leyenda(f)', 'jugo(m)',
     'boño(m)', 'bamba(f)', 'fieltro(m)', 'baya(f)', 'nata(f)', 'gesto(m)', 'anochecer(m)',
     'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)',
     'Play 2(f)', 'Wii(f)', 'gamarús(m)', 'cabr(ón|ona)', 'crack(m)', 'makina(m)', 'artista(m)',
-    'leyenda(f)'
+    'melena(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -76,6 +76,21 @@ let level = [
     'muy', 'poco', 'ligeramente', 'extremadamente', 'intensamente', 'sorprendentemente',
 ];
 
+let gube = [
+    'ga', 'ge', 'gi', 'go', 'gu',
+    'ba', 'bi', 'bu', 'be', 'bo',
+    'mo', 'mu', 'ma', 'me',
+    'ño', 'ñi', 'ñu', 'ña', 'ñe',
+    'gre', 'bloc', 'glo', 'zze',
+    'zzu', 'clu', 'gri', 'mun',
+    'bra', 'ggu', 'lib',
+    'cho', 'chu', 'chi', 'che',
+    'shi', 'sho', 'sha', 
+];
+let gubeEnding = [
+    'ñolo', 'ré', 'lé', 'nik', 'zzek', 'loc', 'gra', 'nus', 'ñí', 'be'
+];
+
 let words = {
     sustantive,
     adjective,
@@ -85,6 +100,9 @@ let words = {
     verbParticle,
     adverbParticle,
     level,
+    //
+    gube,
+    gubeEnding,
 };
 
 module.exports = words;

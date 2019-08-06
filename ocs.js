@@ -5,7 +5,6 @@ let {
     withProbability,
     getRandomGender,
     capitalizeFirstLetter,
-    mangleWord,
 } = require('./utils');
 let words = require('./data');
 let {
@@ -16,6 +15,7 @@ let {
     generateAdjective,
     generateAdverb,
     generateVerbTe,
+    generateGube,
 } = require('./generators');
 
 let structures = [
@@ -265,6 +265,10 @@ let generateOc = ({structure, gender, doPluralize, caseData}) => {
                     element = getUniqueElement({ happenings, type });
                 }
 
+                if (withProbability(0.1) && type !== 'article') {
+                    element = generateGube();
+                }
+
                 if (isFirstComponent) {
                     oc = element;
                 } else {
@@ -286,9 +290,6 @@ let allowedStructures = [
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
     let generatedOc = generateOc({structure: structures[randomType]});
-    if (withProbability(0.01)) {
-        generatedOc = mangleWord({ word: generatedOc, intensity: 5 });
-    }
     let result = `${randomType} ${capitalizeFirstLetter(generatedOc)}`;
     console.log(result);
 }
