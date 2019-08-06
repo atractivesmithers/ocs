@@ -1,10 +1,14 @@
 - translate ocs to different languages using some translation api (20% ?)
+- diccionario reducido para ninños
+
+- que prefieres y versus con rima
+- funcion que combine silabas graciosas como ol oño ube etc. y genere gubes que se meten al azar
 
 - split utils into utils for different gramatical elements
-
 - del/de la/de los/de las <----
+- verbs with/without object
 
-- verbo+te + un/a + sustantivo (fumarte)
+
 - declaran + verbo-do (o sustantivo) al a la sustantivo o adjetivo (extinto) +? read-ing this
 - que prefiwres, un/a sustantivo (o infinitivo) o un/a sustantivo (o infinitivo)
 - un/a sustantivo verbo-ndo al/a la sustantivo

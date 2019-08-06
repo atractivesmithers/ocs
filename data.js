@@ -18,7 +18,9 @@ let sustantive = [
     'Wallapop(m)', 'Mentos(m)', 'huella(f)', 'manguera(f)', 'clan(m)', 'buga(m)', 'gube(m)',
     'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'gruñolo(m)', 'bagule(m)', 'bugaléy(m)',
     'boño(m)', 'bamba(f)', 'fieltro(m)', 'baya(f)', 'nata(f)', 'gesto(m)', 'anochecer(m)',
-    'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)'
+    'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)',
+    'Play 2(f)', 'Wii(f)', 'gamarús(m)', 'cabr(ón|ona)', 'crack(m)', 'makina(m)', 'artista(m)',
+    'leyenda(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -33,7 +35,7 @@ let adjective = [
     'antigu(o|a)', 'legendari(o|a)', 'místic(o|a)', 'fascista', 'judí(o|a)', 'vegan(o|a)',
     'roj(o|a)', 'indepe', 'mediterráne(o|a)', 'lent(o|a)', 'suave', 'immediat(o|a)', 'elegante',
     'astut(o|a)', 'asqueros(o|a)', 'erótic(o|a)', 'militar', 'sec(o|a)', 'bob(o|a)', 'guap(o|a)',
-    'rare', 'badass', 'comfi'
+    'rare', 'badass', 'comfi', 'chismos(o|a)'
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',

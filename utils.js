@@ -62,6 +62,9 @@ const removeTilde = word => {
 }
 
 const pluralize = sustantive => {
+    if (endsWith({ word: sustantive, char:'k' })) {
+        return `${sustantive}s`;
+    }
 	if (lastChar(sustantive) === 'z') return `${removeLastChar(sustantive)}ces`;
     if (hasTilde(secondLastChar(sustantive))) {
         sustantive = removeTilde(sustantive);
@@ -80,7 +83,11 @@ const diminutive = ({ word, gender }) => {
 		return `${word}`;
 	}
     word = removeTilde(word);
-    if (endsWith({ word, char:'x' })) {
+    if (endsWithEnding({word, ending: 'ia'})) {
+        word = removeLastChar(word);
+        return `${word}${ending}`;
+    }
+    if (endsWith({ word, char:'l' }) || endsWith({ word, char:'x' })) {
         return `${word}${ending}`;
     }
     if (endsWith({ word, char:'n' }) || endsWith({ word, char:'r' })) {
@@ -234,6 +241,10 @@ const addRandomLevel = adjective => {
     return `${getRandomLevel()} ${adjective}`;
 }
 
+const te = verb => {
+    return `${verb}te`;
+}
+
 module.exports = {
 	isVocal,
 	pluralize,
@@ -255,4 +266,5 @@ module.exports = {
     diz,
     getRandomLevel,
     addRandomLevel,
+    te,
 };

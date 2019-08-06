@@ -2,6 +2,8 @@ let {
     endsWithEnding,
     startsWithBeginning,
     makeInfinitiveVerbGerund,
+    diminutive,
+    pluralize,
 } = require('./utils');
 
 const assert = ({name, val, expected}) => {
@@ -16,6 +18,26 @@ const assert = ({name, val, expected}) => {
         console.error(`Expected value ${expected}, got value ${actual}`);
     }
 }
+
+// pluralize //
+assert({ // TODO:
+    name: 'pluralize punk',
+    val: () => pluralize('punk'),
+    expected: 'punks',
+});
+
+// diminutive //
+
+assert({
+    name: 'make futil diminute',
+    val: () => diminutive({word: 'futil', gender: 'm'}),
+    expected: 'futilito',
+});
+assert({
+    name: 'make substancia diminute',
+    val: () => diminutive({word: 'substancia', gender: 'f'}),
+    expected: 'substanciita',
+});
 
 // makeInfinitiveVerbGerund //
 

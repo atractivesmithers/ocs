@@ -14,6 +14,7 @@ let {
     makeInfinitiveVerbGerund,
     diz,
     addRandomLevel,
+    te,
 } = require('./utils');
 
 const generateVerbGerund = ({happenings}) => {
@@ -68,6 +69,13 @@ const generateSustantivizedAdjective = ({happenings}) => {
     return adjective;
 }
 
+const generateVerbTe = ({happenings}) => {
+    let fumarte = withProbability(0.2);
+    if (fumarte) return te('fumar');
+    let verb = getUniqueElement({ happenings, type: 'verbInfinitive' });
+    return te(verb);
+}
+
 const generateSustantive = ({happenings, gender, doPluralize}) => {
     let sustantive;
     let sustantiveGender;
@@ -86,7 +94,7 @@ const generateSustantive = ({happenings, gender, doPluralize}) => {
     doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.1);
     if (doPluralize) {
         sustantive = pluralize(sustantive);
-    } else if (sustantiveGender === 'm') {
+    } else if (sustantiveGender === 'm' && !doDiminutive) {
         let doEo = withProbability(0.05);
         if (doEo) {
             sustantive = eo(sustantive);
@@ -99,30 +107,56 @@ const generateSustantive = ({happenings, gender, doPluralize}) => {
     };
 }
 
-const generateArticle = ({ gender, doPluralize, concrete }) => {
+const generateArticle = ({ gender, doPluralize, concrete, a }) => {
     let options;
     if (concrete) {
-        options = {
-            m: {
-                p: 'los',
-                s: 'el',
-            },
-            f: {
-                p: 'las',
-                s: 'la',
-            }
-        };
+        if (a) {
+            options = {
+                m: {
+                    p: 'a los',
+                    s: 'al',
+                },
+                f: {
+                    p: 'a las',
+                    s: 'a la',
+                }
+            };
+        } else {
+            options = {
+                m: {
+                    p: 'los',
+                    s: 'el',
+                },
+                f: {
+                    p: 'las',
+                    s: 'la',
+                }
+            };
+        }
     } else {
-        options = {
-            m: {
-                p: 'unos',
-                s: 'un',
-            },
-            f: {
-                p: 'unas',
-                s: 'una',
-            }
-        };
+        if (a) {
+            options = {
+                m: {
+                    p: 'a unos',
+                    s: 'a un',
+                },
+                f: {
+                    p: 'a unas',
+                    s: 'a una',
+                }
+            };
+        } else {
+            options = {
+                m: {
+                    p: 'unos',
+                    s: 'un',
+                },
+                f: {
+                    p: 'unas',
+                    s: 'una',
+                }
+            };
+        }
     }
     let articleGender = gender ? gender : getRandomGender();
     let isPlural = doPluralize !== undefined ? doPluralize : withProbability(0.3);
@@ -141,8 +175,8 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
     let adjective;
     let adjectiveGender;
     let doLevel = withProbability(0.1);
-    doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.1);
-    let isDizo = withProbability(0.1);
+    doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.15);
+    let isDizo = withProbability(0.06);
     if (isDizo) {
         adjectiveGender = gender || getRandomGender();
         let verb = getUniqueElement({ happenings, type: 'verbInfinitive' });
@@ -182,8 +216,6 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
 }
 
 const generateAdverb = ({happenings}) => {
-    // 'a lo' + sustantive
-    // 'como ' + article + sustantive
     let adverb;
     let buildAdverb = withProbability(0.5);
     let mente = withProbability(0.5);
@@ -212,4 +244,5 @@ module.exports = {
     generateArticle,
     generateAdjective,
     generateAdverb,
+    generateVerbTe,
 };
