@@ -18,8 +18,13 @@ let {
     mangleWord,
 } = require('./utils');
 
-const generateVerbGerund = ({happenings}) => {
+const generateVerbInfinitive = ({happenings}) => {
     let verbInfinitive = getUniqueElement({ happenings, type: 'verbInfinitive' });
+    return verbInfinitive;
+}
+
+const generateVerbGerund = ({happenings}) => {
+    let verbInfinitive = generateVerbInfinitive({ happenings });
     let verbGerund = makeInfinitiveVerbGerund(verbInfinitive);
     if (withProbability(0.3)) {
     	if (withProbability(0.6)) {
@@ -73,8 +78,8 @@ const generateSustantivizedAdjective = ({happenings}) => {
 const generateVerbTe = ({happenings}) => {
     let fumarte = withProbability(0.2);
     if (fumarte) return te('fumar');
-    let verb = getUniqueElement({ happenings, type: 'verbInfinitive' });
-    return te(verb);
+    let verbInfinitive = generateVerbInfinitive({ happenings });
+    return te(verbInfinitive);
 }
 
 const generateSustantive = ({happenings, gender, doPluralize}) => {
@@ -180,8 +185,8 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
     let isDizo = withProbability(0.06);
     if (isDizo) {
         adjectiveGender = gender || getRandomGender();
-        let verb = getUniqueElement({ happenings, type: 'verbInfinitive' });
-        adjective = diz({ verb, gender: adjectiveGender, doPluralize });
+        let verbInfinitive = generateVerbInfinitive({ happenings });
+        adjective = diz({ verb: verbInfinitive, gender: adjectiveGender, doPluralize });
         if (doLevel) {
             adjective = addRandomLevel(adjective);
         }
@@ -221,9 +226,10 @@ const generateAdverb = ({happenings}) => {
     let buildAdverb = withProbability(0.5);
     let mente = withProbability(0.5);
     if (buildAdverb) {
-        let { sustantive, sustantiveGender } = generateSustantive({ happenings });
         // TODO: gendered adverb particles
+        // the sustantive generated here should be singular, for example, for 'a lo'.
         let adverbParticle = getUniqueElement({ happenings, type: 'adverbParticle' });
+        let { sustantive, sustantiveGender } = generateSustantive({ happenings });
         adverb = `${adverbParticle} ${sustantive}`;
     } else if (mente) {
         let adjective;

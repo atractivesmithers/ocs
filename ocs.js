@@ -158,6 +158,7 @@ let structures = [
                 }
             },
             {random: true, options:[0,1], probability: 1},
+            // todo: use names instead of indices in options
             {literal:'reading this', probability: 0.4},
         ]
     },
@@ -178,7 +179,7 @@ let structures = [
         ]
     },
     {
-        name: 'jugamos15',
+        name: 'jugamos15', // TODO: spaces, capitalizing
         components: [
             {literal:'¿', probability: 1},
             {literal:'jugamos', probability: 1},

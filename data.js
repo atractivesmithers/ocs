@@ -23,7 +23,10 @@ let sustantive = [
     'melena(f)', 'garfio(m)', 'bebé(|)', 'nadó(m)', 'Satanás(m)', 'Judas(m)', 'Galileo(m)',
     'Pujol(m)', 'Siscu(m)', 'Ronho(m)', 'Robinho(m)', 'Figo(m)', 'Saviola(m)', 'Deco(m)',
     'Veletti(m)', 'McCarthy(m)', 'doblón(m)', 'rublo(m)', 'Roblox(m)', 'Minecraft(m)',
-    'mota(f)', 'carajillo(m)', 'copa(f)', 'canuto(m)', 'vaina(f)'
+    'mota(f)', 'carajillo(m)', 'copa(f)', 'copita(f)', 'canuto(m)', 'vaina(f)', 'cabeza(f)', 
+    'Baltasar(m)', 'corito(m)', 'mango(m)', 'cuscús(m)', 'yay(o|a)','doctor(|a)','abogad(o|a)',
+    'mirada(f)', 'beso(m)', 'grito(m)', 'reunión(f)', 'mermelada(f)', 'horchata(f)',
+    'gueriller(o|a)', 'juez(|)', 'DS(f)', 'iPhone(m)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -40,7 +43,10 @@ let adjective = [
     'astut(o|a)', 'asqueros(o|a)', 'erótic(o|a)', 'militar', 'sec(o|a)', 'bob(o|a)', 'guap(o|a)',
     'rare', 'badass', 'comfi', 'chismos(o|a)', 'grumos(o|a)', 'líquid(o|a)', 'sólid(o|a)', 'guay',
     'guap(o|a)', 'imbécil', 'amateur', 'salacious', 'pompos(o|a)', 'edipos(o|a)', 'rastrer(o|a)',
-
+    'petit(|e)', 'jocos(o|a)', 'exquisit(o|a)', 'san(o|a)', 'dominican(o|a)', 'precios(o|a)',
+    'invisible', 'apestos(o|a)', 'ingrávid(o|a)', 'maj(o|a)', 'simpátic(o|a)', 'agradable',
+    'desagradable', 'arcaic(o|a)', 'futurista', 'estudios(o|a)', 'dur(o|a)', 'bland(o|a)',
+    'racista', 'sexista', 'capacitista',
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -48,7 +54,8 @@ let place = [
     'Namek', 'Lleida', 'el bloque', 'el fiordo', 'República Dominicana', 'un rincón',
     'el Macdonals', 'el barrio', 'la calle', 'el Sonar', 'Sarriá', 'Gracia', 'Vic',
     'la cocina', 'el desierto', 'la zona', 'la Bola Negra', 'la trap house', 'Plaza Castilla',
-    'Badalona', 'un huequito',
+    'Badalona', 'un huequito', 'la plaza de toros', 'el Condis', 'el Carrefur',
+    'el 24'
 ];
 let verbInfinitive = [
     'comer', 'rapar', 'discriminar', 'amar', 'fisgar', 'lamer', 'defenestrar', 'luchar',

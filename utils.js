@@ -1,7 +1,7 @@
 let words = require('./data');
 
 const isVocal = char => {
-    return ['a','e','i','o','u'].indexOf(char) > -1;
+    return ['a','á','e','é','i','í','o','ó','u','ú'].indexOf(char) > -1;
 }
 const endsWithVocal = word => isVocal(lastChar(word));
 const hasTilde = char => {
@@ -79,7 +79,7 @@ const isProperName = word => word[0].toUpperCase() === word[0];
 
 const diminutive = ({ word, gender }) => {
     let ending = gender === 'm' ? 'ito' : 'ita';
-	if (isProperName(word)) {
+	if (isProperName(word) || endsWithEnding({word, ending: 'ito'})) {
 		return `${word}`;
 	}
     word = removeTilde(word);

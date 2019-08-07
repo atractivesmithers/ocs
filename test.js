@@ -20,11 +20,27 @@ const assert = ({name, val, expected}) => {
 }
 
 // pluralize //
-assert({ // TODO:
+assert({
     name: 'pluralize punk',
     val: () => pluralize('punk'),
     expected: 'punks',
 });
+assert({
+    name: 'pluralize casa',
+    val: () => pluralize('casa'),
+    expected: 'casas',
+});
+assert({
+    name: 'pluralize bebé',
+    val: () => pluralize('bebé'),
+    expected: 'bebés',
+});
+assert({
+    name: 'pluralize arcén',
+    val: () => pluralize('arcén'),
+    expected: 'arcenes',
+});
+
 
 // diminutive //
 
@@ -37,6 +53,11 @@ assert({
     name: 'make substancia diminute',
     val: () => diminutive({word: 'substancia', gender: 'f'}),
     expected: 'substanciita',
+});
+assert({
+    name: 'make corito diminute',
+    val: () => diminutive({word: 'corito', gender: 'm'}),
+    expected: 'corito',
 });
 
 // makeInfinitiveVerbGerund //
