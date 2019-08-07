@@ -175,7 +175,7 @@ const generateArticle = ({ gender, doPluralize, concrete, a }) => {
 const generateAdjective = ({happenings, gender, doPluralize}) => {
     let adjective;
     let adjectiveGender;
-    let doLevel = withProbability(0.1);
+    let doLevel = withProbability(0.15);
     doPluralize = doPluralize !== undefined ? doPluralize : withProbability(0.15);
     let isDizo = withProbability(0.06);
     if (isDizo) {

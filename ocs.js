@@ -177,17 +177,56 @@ let structures = [
             {literal:'a la girl reading this', probability: 1},
         ]
     },
+    {
+        name: 'jugamos15',
+        components: [
+            {literal:'¿', probability: 1},
+            {literal:'jugamos', probability: 1},
+            {
+                type:'article',
+                probability: 1,
+                caseData: {
+                    a: true,
+                }
+            },
+            {random: true, options:[0,1], probability: 1, quoted: true},
+            {literal:'?', probability: 1},
+        ]
+    }
 ];
 
 let happenings = [];
 
-let generateOc = ({structure, gender, doPluralize, caseData}) => {
+let expandOc = ({oc, newElement, quoted, isFirstComponent}) => {
+    if (isFirstComponent) {
+        oc = newElement;
+    } else {
+        if (quoted) {
+            oc += ` \'${newElement}\'`;
+        } else {
+            oc += ` ${newElement}`;
+        }
+    } 
+    return oc;
+};
+
+let generateOc = ({structure, gender, doPluralize, caseData, quoted}) => {
     const { components } = structure;
     let oc = '';
     gender = gender ? gender : getRandomGender();
     happenings = [];
     let isFirstComponent = true;
-    for ({ type, probability, literal, name, random, options, caseData, restartGender } of components) {
+    for ({
+        type,
+        probability,
+        literal,
+        name,
+        random,
+        options,
+        caseData,
+        restartGender,
+        quoted,
+    } of components) {
         let element;
         if (withProbability(probability)) {
             if (restartGender) {
@@ -199,30 +238,44 @@ let generateOc = ({structure, gender, doPluralize, caseData}) => {
             }
             if (random) {
                 let option = getRandomItem(options);
-                let randomOc = generateOc({structure: structures[option], gender, doPluralize});
-                if (isFirstComponent) {
-                    oc = randomOc;
-                } else {
-                    oc += ` ${randomOc}`;
-                }  
+                let randomOc = generateOc({
+                    structure: structures[option],
+                    gender,
+                    doPluralize,
+                    quoted,
+                });
+                oc = expandOc({
+                    oc,
+                    newElement: randomOc,
+                    quoted,
+                    isFirstComponent,
+                });
             } else if (name) {
                 let foundStructure = structures.find(s => s.name === name);
                 if (foundStructure) {
-                    let generatedOc = generateOc({structure: foundStructure, gender, doPluralize, caseData});
-                    if (isFirstComponent) {
-                        oc = generatedOc;
-                    } else {
-                        oc += ` ${generatedOc}`;
-                    } 
+                    let generatedOc = generateOc({
+                        structure: foundStructure,
+                        gender,
+                        doPluralize,
+                        caseData,
+                    });
+                    oc = expandOc({
+                        oc,
+                        newElement: generatedOc,
+                        quoted,
+                        isFirstComponent,
+                        quoted,
+                    });
                 } else {
                     console.error(`No structure with name ${name} has been defined`);
                 }
             } else if (literal) {
-                if (isFirstComponent) {
-                    oc = literal;
-                } else {
-                    oc += ` ${literal}`;
-                } 
+                oc = expandOc({
+                    oc,
+                    newElement: literal,
+                    quoted,
+                    isFirstComponent,
+                });
             } else {
                 if (type === 'adverb') {
                     element = generateAdverb({ happenings });
@@ -265,15 +318,16 @@ let generateOc = ({structure, gender, doPluralize, caseData}) => {
                     element = getUniqueElement({ happenings, type });
                 }
 
-                if (withProbability(0.1) && type !== 'article') {
-                    element = generateGube();
+                if (withProbability(0.04) && type !== 'article') {
+                    // element = generateGube();
                 }
 
-                if (isFirstComponent) {
-                    oc = element;
-                } else {
-                    oc += ` ${element}`;
-                } 
+                oc = expandOc({
+                    oc,
+                    newElement: element,
+                    quoted,
+                    isFirstComponent,
+                });
             }
             isFirstComponent = false;
         }
@@ -284,7 +338,7 @@ let generateOc = ({structure, gender, doPluralize, caseData}) => {
 let iterations = 100;
 
 let allowedStructures = [
-    0,1,2,3,4,5,6,7,8,11,12,13,14,
+    0,1,2,3,4,5,6,7,8,11,12,13,14,15,
 ];
 
 for (let i = 0; i < iterations; i++) {

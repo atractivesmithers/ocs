@@ -20,7 +20,10 @@ let sustantive = [
     'boño(m)', 'bamba(f)', 'fieltro(m)', 'baya(f)', 'nata(f)', 'gesto(m)', 'anochecer(m)',
     'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)',
     'Play 2(f)', 'Wii(f)', 'gamarús(m)', 'cabr(ón|ona)', 'crack(m)', 'makina(m)', 'artista(m)',
-    'melena(f)'
+    'melena(f)', 'garfio(m)', 'bebé(|)', 'nadó(m)', 'Satanás(m)', 'Judas(m)', 'Galileo(m)',
+    'Pujol(m)', 'Siscu(m)', 'Ronho(m)', 'Robinho(m)', 'Figo(m)', 'Saviola(m)', 'Deco(m)',
+    'Veletti(m)', 'McCarthy(m)', 'doblón(m)', 'rublo(m)', 'Roblox(m)', 'Minecraft(m)',
+    'mota(f)', 'carajillo(m)', 'copa(f)', 'canuto(m)', 'vaina(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -35,7 +38,9 @@ let adjective = [
     'antigu(o|a)', 'legendari(o|a)', 'místic(o|a)', 'fascista', 'judí(o|a)', 'vegan(o|a)',
     'roj(o|a)', 'indepe', 'mediterráne(o|a)', 'lent(o|a)', 'suave', 'immediat(o|a)', 'elegante',
     'astut(o|a)', 'asqueros(o|a)', 'erótic(o|a)', 'militar', 'sec(o|a)', 'bob(o|a)', 'guap(o|a)',
-    'rare', 'badass', 'comfi', 'chismos(o|a)'
+    'rare', 'badass', 'comfi', 'chismos(o|a)', 'grumos(o|a)', 'líquid(o|a)', 'sólid(o|a)', 'guay',
+    'guap(o|a)', 'imbécil', 'amateur', 'salacious', 'pompos(o|a)', 'edipos(o|a)', 'rastrer(o|a)',
+
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -58,7 +63,8 @@ let verbInfinitive = [
     'pelear', 'mascar', 'lamer', 'rockear', 'peinar', 'arreglar', 'ballear', 'escupir', 
     'gatear', 'explorar', 'ignorar', 'volar', 'planear', 'jugar', 'pintar', 'rescatar',
     'esperar', 'quemar', 'cincelar', 'operar', 'rendir', 'fallar', 'afinar', 'esculpir',
-    'producir', 'droppear'
+    'producir', 'droppear', 'agenciar', 'disparar', 'goler', 'macerar', 'biselar',
+    'marcar', 'lavar', 'manchar', 'hervir',
 ];
 let verbParticle = [
     'contra', 'con', 'a', 'en', 'sobre', 'sin', 'bajo', 'desde', 'hasta'
@@ -67,13 +73,14 @@ let adverb = [
     'lento', 'de puta madre', 'fatal', 'genial', 'rápido', 'con prisa', 'de chill',
     'sin esfuerzo', 'de mala manera', 'a duras penas', 'por el meme', 'de golpe',
     'de immediato', 'lo antes posible', 'de pasada', 'de mañaneo', 'de lujo', 'como si nada',
-
+    'forzosamente', 'regular', 'bien pepino', 'bien heavy', 'ambiciosamente'
 ];
 let adverbParticle = [
     'a lo', 'cual'
 ];
 let level = [
     'muy', 'poco', 'ligeramente', 'extremadamente', 'intensamente', 'sorprendentemente',
+    'brutalmente', 'inesperadamente', 'fuertemente',
 ];
 
 let gube = [
