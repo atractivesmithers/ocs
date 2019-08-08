@@ -16,9 +16,14 @@ let sustantive = [
     'emo(m)', 'cinturón(m)', 'Vodafone(m)', 'estornudo(m)', 'gnomo(m)', 'petanca(m)',
     'substancia(f)', 'gramo(m)', 'arcilla(f)', 'sabor(m)', 'rave(f)', 'pepa(f)', 'Nespresso(m)',
     'Wallapop(m)', 'Mentos(m)', 'huella(f)', 'manguera(f)', 'clan(m)', 'buga(m)', 'gube(m)',
-    'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'gruñolo(m)', 'bagule(m)', 'bugaléy(m)',
+    'gamba(f)', 'Camarón(m)', 'caca(f)', 'alzamiento(m)', 'leyenda(f)', 'jugo(m)',
     'boño(m)', 'bamba(f)', 'fieltro(m)', 'baya(f)', 'nata(f)', 'gesto(m)', 'anochecer(m)',
-    'carabina(f)', 'bala(f)'
+    'carabina(f)', 'bala(f)', 'bigote(m)', 'ruleta(f)', 'Digimon(m)', 'avena(f)', 'lana(f)',
+    'Play 2(f)', 'Wii(f)', 'gamarús(m)', 'cabr(ón|ona)', 'crack(m)', 'makina(m)', 'artista(m)',
+    'melena(f)', 'garfio(m)', 'bebé(|)', 'nadó(m)', 'Satanás(m)', 'Judas(m)', 'Galileo(m)',
+    'Pujol(m)', 'Siscu(m)', 'Ronho(m)', 'Robinho(m)', 'Figo(m)', 'Saviola(m)', 'Deco(m)',
+    'Veletti(m)', 'McCarthy(m)', 'doblón(m)', 'rublo(m)', 'Roblox(m)', 'Minecraft(m)',
+    'mota(f)', 'carajillo(m)', 'copa(f)', 'canuto(m)', 'vaina(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -32,7 +37,10 @@ let adjective = [
     'picante', 'dulce', 'salad(o|a)', 'musculos(o|a)', 'doblad(o|a)', 'muscular', 'genial',
     'antigu(o|a)', 'legendari(o|a)', 'místic(o|a)', 'fascista', 'judí(o|a)', 'vegan(o|a)',
     'roj(o|a)', 'indepe', 'mediterráne(o|a)', 'lent(o|a)', 'suave', 'immediat(o|a)', 'elegante',
-    'astut(o|a)', 'asqueros(o|a)', 'erótic(o|a)', 'militar', 'sec(o|a)', 'bob(o|a)',
+    'astut(o|a)', 'asqueros(o|a)', 'erótic(o|a)', 'militar', 'sec(o|a)', 'bob(o|a)', 'guap(o|a)',
+    'rare', 'badass', 'comfi', 'chismos(o|a)', 'grumos(o|a)', 'líquid(o|a)', 'sólid(o|a)', 'guay',
+    'guap(o|a)', 'imbécil', 'amateur', 'salacious', 'pompos(o|a)', 'edipos(o|a)', 'rastrer(o|a)',
+
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -42,18 +50,6 @@ let place = [
     'la cocina', 'el desierto', 'la zona', 'la Bola Negra', 'la trap house', 'Plaza Castilla',
     'Badalona', 'un huequito',
 ];
-let verbGerund = [
-    'comiendo', 'sucando', 'driblando', 'asando', 'silbando', 'esnifando', 'oliendo',
-    'pelando', 'cascando', 'gozando', 'wildin\'', 'boolin\'', 'gritando', 'mintiendo',
-    'arrimando', 'reflexionando', 'peleando', 'mascando', 'lamiendo', 'untando',
-    'rockeando', 'bailando', 'peinando', 'descubriendo', 'gateando', 'explorando',
-    'ignorando', 'volando', 'planeando', 'jugando', 'calibrando', 'pintando',
-    'rescatando', 'esperando', 'quemando', 'boosteando', 'cincelando', 'clavando',
-    'operando', 'musculando', 'rindiendo', 'fallando', 'secando', 'afinando',
-    'esculpiendo', 'produciendo', 'escupiendo', 'marinando', 'ballin\'', 'bebiendo',
-    'arreglando', 'getteando', 'blasteando', 'salpimentando', 'exprimiendo', 'droppeando',
-    
-];
 let verbInfinitive = [
     'comer', 'rapar', 'discriminar', 'amar', 'fisgar', 'lamer', 'defenestrar', 'luchar',
     'bailar', 'follar', 'especiar', 'cocinar', 'lamer', 'beber', 'untar', 'esperar',
@@ -62,7 +58,13 @@ let verbInfinitive = [
     'fruncir', 'olisquear', 'vomitar', 'esnifar', 'clavar', 'menear', 'mear', 'follar',
     'chamuscar', 'amarrar', 'fundir', 'glotonear', 'castrar', 'asar', 'gritar', 'mojar',
     'secar', 'marinar', 'gettear', 'blastear', 'salpimentar', 'exprimir', 'calibrar',
-    'masturbar',
+    'masturbar', 'hundir', 'sucar', 'driblar', 'asar', 'silbar', 'esnifar', 'oler',
+    'pelar', 'cascar', 'gozar', 'wildear', 'booliar', 'mentir', 'arrimar', 'reflexionar',
+    'pelear', 'mascar', 'lamer', 'rockear', 'peinar', 'arreglar', 'ballear', 'escupir', 
+    'gatear', 'explorar', 'ignorar', 'volar', 'planear', 'jugar', 'pintar', 'rescatar',
+    'esperar', 'quemar', 'cincelar', 'operar', 'rendir', 'fallar', 'afinar', 'esculpir',
+    'producir', 'droppear', 'agenciar', 'disparar', 'goler', 'macerar', 'biselar',
+    'marcar', 'lavar', 'manchar', 'hervir',
 ];
 let verbParticle = [
     'contra', 'con', 'a', 'en', 'sobre', 'sin', 'bajo', 'desde', 'hasta'
@@ -71,21 +73,43 @@ let adverb = [
     'lento', 'de puta madre', 'fatal', 'genial', 'rápido', 'con prisa', 'de chill',
     'sin esfuerzo', 'de mala manera', 'a duras penas', 'por el meme', 'de golpe',
     'de immediato', 'lo antes posible', 'de pasada', 'de mañaneo', 'de lujo', 'como si nada',
-
+    'forzosamente', 'regular', 'bien pepino', 'bien heavy', 'ambiciosamente'
 ];
 let adverbParticle = [
     'a lo', 'cual'
+];
+let level = [
+    'muy', 'poco', 'ligeramente', 'extremadamente', 'intensamente', 'sorprendentemente',
+    'brutalmente', 'inesperadamente', 'fuertemente',
+];
+
+let gube = [
+    'ga', 'ge', 'gi', 'go', 'gu',
+    'ba', 'bi', 'bu', 'be', 'bo',
+    'mo', 'mu', 'ma', 'me',
+    'ño', 'ñi', 'ñu', 'ña', 'ñe',
+    'gre', 'bloc', 'glo', 'zze',
+    'zzu', 'clu', 'gri', 'mun',
+    'bra', 'ggu', 'lib',
+    'cho', 'chu', 'chi', 'che',
+    'shi', 'sho', 'sha', 
+];
+let gubeEnding = [
+    'ñolo', 'ré', 'lé', 'nik', 'zzek', 'loc', 'gra', 'nus', 'ñí', 'be'
 ];
 
 let words = {
     sustantive,
     adjective,
     place,
-    verbGerund,
     adverb,
     verbInfinitive,
     verbParticle,
     adverbParticle,
+    level,
+    //
+    gube,
+    gubeEnding,
 };
 
 module.exports = words;

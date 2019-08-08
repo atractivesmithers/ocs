@@ -4,6 +4,7 @@ let {
     getUniqueElement,
     withProbability,
     getRandomGender,
+    capitalizeFirstLetter,
 } = require('./utils');
 let words = require('./data');
 let {
@@ -13,6 +14,8 @@ let {
     generateArticle,
     generateAdjective,
     generateAdverb,
+    generateVerbTe,
+    generateGube,
 } = require('./generators');
 
 let structures = [
@@ -21,7 +24,14 @@ let structures = [
         components: [
             {type:'sustantive', probability: 1},
             {literal: 'de', probability: 1},
-            {type:'sustantive', probability: 1, restartGender: true},
+            {
+                type:'sustantive',
+                probability: 1, 
+                restartGender: true,
+                caseData: {
+                    isPlural: false,
+                }
+            },
         ]
     },
     {
@@ -58,7 +68,7 @@ let structures = [
         name: 'basico5',
         components: [
             {type:'article', probability: 1},
-            {type:'adjective', probability: 1},
+            {type:'adjective', probability: 1}, // TODO: gender issues
             {type:'sustantive', probability: 1},
         ]
     },
@@ -95,7 +105,13 @@ let structures = [
     {
         name: 'basico10',
         components: [
-            {type:'article', probability: 1, caseData: {gender: 'f', isPlural: false}},
+            {
+                type:'article',
+                probability: 1,
+                caseData: {
+                    concrete: true,
+                }
+            },
             {type:'adjective', probability: 0.2},
             {name:'basico0', probability: 1},
         ]
@@ -103,74 +119,184 @@ let structures = [
     {
         name: 'novia11', // TODO: no concuerda??
         components: [
-            {literal:'que a tu novia la conozcan en el barrio como', probability: 0.3},
-            {name:'basico10', probability: 1},
+            {literal:'que a tu novia la conozcan en el barrio como', probability: 1},
+            {
+                name:'basico10',
+                probability: 1,
+                caseData: {
+                    gender: 'f',
+                    isPlural: false,
+                    concrete: true,
+                }
+            },
+        ]
+    },
+    {
+        name: 'te12',
+        components: [
+            {type:'verbTe', probability: 1},
+            {
+                type:'article',
+                probability: 1,
+                caseData: {
+                    concrete: false,
+                }
+            },
+            {random: true, options:[0,1,3], probability: 1},
+        ]
+    },
+    {
+        name: 'declaran13',
+        components: [
+            {literal:'declaran', probability: 1},
+            {type:'adjective', probability: 1},
+            {
+                type:'article',
+                probability: 1,
+                caseData: {
+                    a: true,
+                }
+            },
+            {random: true, options:[0,1], probability: 1},
+            {literal:'reading this', probability: 0.4},
+        ]
+    },
+    {
+        name: 'declaran14',
+        components: [
+            {literal:'declaran', probability: 1},
+            {
+                type:'adjective',
+                probability: 1,
+                caseData: {
+                    a: true,
+                    gender: 'f',
+                    isPlural: false,
+                }
+            },
+            {literal:'a la girl reading this', probability: 1},
+        ]
+    },
+    {
+        name: 'jugamos15',
+        components: [
+            {literal:'¿', probability: 1},
+            {literal:'jugamos', probability: 1},
+            {
+                type:'article',
+                probability: 1,
+                caseData: {
+                    a: true,
+                }
+            },
+            {random: true, options:[0,1], probability: 1, quoted: true},
+            {literal:'?', probability: 1},
         ]
     }
 ];
 
 let happenings = [];
 
-let generateOc = structure => {
+let expandOc = ({oc, newElement, quoted, isFirstComponent}) => {
+    if (isFirstComponent) {
+        oc = newElement;
+    } else {
+        if (quoted) {
+            oc += ` \'${newElement}\'`;
+        } else {
+            oc += ` ${newElement}`;
+        }
+    } 
+    return oc;
+};
+
+let generateOc = ({structure, gender, doPluralize, caseData, quoted}) => {
     const { components } = structure;
     let oc = '';
-    let gender = getRandomGender();
+    gender = gender ? gender : getRandomGender();
     happenings = [];
-    let doPluralize;
     let isFirstComponent = true;
-    for ({ type, probability, literal, name, random, options, caseData, restartGender } of components) {
+    for ({
+        type,
+        probability,
+        literal,
+        name,
+        random,
+        options,
+        caseData,
+        restartGender,
+        quoted,
+    } of components) {
         let element;
         if (withProbability(probability)) {
+            if (restartGender) {
+                gender = getRandomGender();
+            }
+            if (caseData) {
+                doPluralize = caseData.isPlural !== undefined ? caseData.isPlural : doPluralize;
+                gender = caseData.gender !== undefined ? caseData.gender : gender;
+            }
             if (random) {
                 let option = getRandomItem(options);
-                let randomOc = generateOc(structures[option]);
-                if (isFirstComponent) {
-                    oc = randomOc;
-                } else {
-                    oc += ` ${randomOc}`;
-                }  
+                let randomOc = generateOc({
+                    structure: structures[option],
+                    gender,
+                    doPluralize,
+                    quoted,
+                });
+                oc = expandOc({
+                    oc,
+                    newElement: randomOc,
+                    quoted,
+                    isFirstComponent,
+                });
             } else if (name) {
                 let foundStructure = structures.find(s => s.name === name);
                 if (foundStructure) {
-                    let generatedOc = generateOc(foundStructure);
-                    if (isFirstComponent) {
-                        oc = generatedOc;
-                    } else {
-                        oc += ` ${generatedOc}`;
-                    } 
+                    let generatedOc = generateOc({
+                        structure: foundStructure,
+                        gender,
+                        doPluralize,
+                        caseData,
+                    });
+                    oc = expandOc({
+                        oc,
+                        newElement: generatedOc,
+                        quoted,
+                        isFirstComponent,
+                        quoted,
+                    });
                 } else {
                     console.error(`No structure with name ${name} has been defined`);
                 }
             } else if (literal) {
-                if (isFirstComponent) {
-                    oc = literal;
-                } else {
-                    oc += ` ${literal}`;
-                } 
+                oc = expandOc({
+                    oc,
+                    newElement: literal,
+                    quoted,
+                    isFirstComponent,
+                });
             } else {
                 if (type === 'adverb') {
                     element = generateAdverb({ happenings });
                 } else if (type === 'article') {
-                    if (caseData) {
-                        gender = caseData.gender;
-                        doPluralize = caseData.isPlural;
-                    }
+                    let concrete = caseData && caseData.concrete !== undefined ? caseData.concrete : true;
+                    let a = caseData && caseData.a !== undefined ? caseData.a : false;
                     let {
                         article,
                         articleGender,
                         isPlural,
-                    } = generateArticle({ gender, doPluralize, concrete: true });
+                    } = generateArticle({ gender, doPluralize, concrete, a });
                     element = article;
                     gender = articleGender;
                     doPluralize = isPlural;
                 } else if (type === 'verbGerund') {
                     element = generateVerbGerund({happenings});
+                } else if (type === 'verbTe') {
+                    element = generateVerbTe({happenings});
                 } else if (type === 'sustantivizedAdjective') {
                     element = generateSustantivizedAdjective({happenings});
                 } else if (type === 'sustantive') {
-                    if (restartGender) {
-                        gender = getRandomGender();
-                    }
                     let {
                         sustantive,
                         sustantiveGender,
@@ -192,11 +318,16 @@ let generateOc = structure => {
                     element = getUniqueElement({ happenings, type });
                 }
 
-                if (isFirstComponent) {
-                    oc = element;
-                } else {
-                    oc += ` ${element}`;
-                } 
+                if (withProbability(0.04) && type !== 'article') {
+                    // element = generateGube();
+                }
+
+                oc = expandOc({
+                    oc,
+                    newElement: element,
+                    quoted,
+                    isFirstComponent,
+                });
             }
             isFirstComponent = false;
         }
@@ -207,12 +338,13 @@ let generateOc = structure => {
 let iterations = 100;
 
 let allowedStructures = [
-    0,1,2,3,4,5,6,7,8,11,
+    0,1,2,3,4,5,6,7,8,11,12,13,14,15,
 ];
 
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
-    let result = `${randomType} ${generateOc(structures[randomType])}`;
+    let generatedOc = generateOc({structure: structures[randomType]});
+    let result = `${randomType} ${capitalizeFirstLetter(generatedOc)}`;
     console.log(result);
 }
 
