@@ -245,6 +245,17 @@ const te = verb => {
     return `${verb}te`;
 }
 
+const writeToFile = ({ name, content }) => {
+    const fs = require('fs');
+    // write to a new file named 2pac.txt
+    fs.writeFile(`${name}.txt`, content, (err) => {
+        // throws an error, you could also catch it here
+        if (err) throw err;
+        // success case, the file was saved
+        console.log(`${name}.txt saved!`);
+    });
+}
+
 module.exports = {
 	isVocal,
 	pluralize,
@@ -267,4 +278,5 @@ module.exports = {
     getRandomLevel,
     addRandomLevel,
     te,
+    writeToFile,
 };

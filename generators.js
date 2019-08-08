@@ -19,6 +19,7 @@ let {
 } = require('./utils');
 
 const generateVerbInfinitive = ({happenings}) => {
+    // TODO: add more metadata to verbs. objeto directo, objeto indirecto?
     let verbInfinitive = getUniqueElement({ happenings, type: 'verbInfinitive' });
     return verbInfinitive;
 }

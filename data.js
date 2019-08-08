@@ -26,7 +26,8 @@ let sustantive = [
     'mota(f)', 'carajillo(m)', 'copa(f)', 'copita(f)', 'canuto(m)', 'vaina(f)', 'cabeza(f)', 
     'Baltasar(m)', 'corito(m)', 'mango(m)', 'cuscús(m)', 'yay(o|a)','doctor(|a)','abogad(o|a)',
     'mirada(f)', 'beso(m)', 'grito(m)', 'reunión(f)', 'mermelada(f)', 'horchata(f)',
-    'gueriller(o|a)', 'juez(|)', 'DS(f)', 'iPhone(m)'
+    'gueriller(o|a)', 'juez(|)', 'DS(f)', 'iPhone(m)', 'basilisco(m)', 'nodo(m)', 'budell(m)',
+    'Kuwabara(m)', 'guava(f)', 'nevera(f)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -46,7 +47,8 @@ let adjective = [
     'petit(|e)', 'jocos(o|a)', 'exquisit(o|a)', 'san(o|a)', 'dominican(o|a)', 'precios(o|a)',
     'invisible', 'apestos(o|a)', 'ingrávid(o|a)', 'maj(o|a)', 'simpátic(o|a)', 'agradable',
     'desagradable', 'arcaic(o|a)', 'futurista', 'estudios(o|a)', 'dur(o|a)', 'bland(o|a)',
-    'racista', 'sexista', 'capacitista',
+    'racista', 'sexista', 'capacitista', 'paulatin(o|a)', 'esmaltad(o|a)', 'indomable',
+    'parmesan(o|a)',
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -58,7 +60,7 @@ let place = [
     'el 24'
 ];
 let verbInfinitive = [
-    'comer', 'rapar', 'discriminar', 'amar', 'fisgar', 'lamer', 'defenestrar', 'luchar',
+    'comer[]', 'rapar', 'discriminar', 'amar', 'fisgar', 'lamer', 'defenestrar', 'luchar',
     'bailar', 'follar', 'especiar', 'cocinar', 'lamer', 'beber', 'untar', 'esperar',
     'soñar', 'flirtear', 'pajear', 'descubrir', 'filtrar', 'ver', 'espiar', 'tumbar',
     'alterar', 'imprimir', 'almorzar', 'lubricar', 'boostear', 'frenar', 'muscular',
