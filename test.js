@@ -102,6 +102,11 @@ assert({
     val: () => makeInfinitiveVerbGerund('ballear'),
     expected: 'ballin\'',
 });
+assert({
+    name: 'make descubrir gerund',
+    val: () => makeInfinitiveVerbGerund('descubrir'),
+    expected: 'descubriendo',
+});
 
 // endsWithEnding //
 

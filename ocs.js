@@ -17,6 +17,10 @@ let {
     generateAdverb,
     generateVerbTe,
     generateGube,
+    generateVerbInfinitive,
+    generateTransitiveVerbInfinitive,
+    generateIntransitiveVerbInfinitive,
+    generateQueATu,
 } = require('./generators');
 
 let structures = [
@@ -45,7 +49,7 @@ let structures = [
     {
         name: 'basico2',
         components: [
-            {type:'verbInfinitive', probability: 1},
+            {type:'transitiveVerbInfinitive', probability: 1},
             {type:'sustantive', probability: 1},
         ]
     },
@@ -118,15 +122,13 @@ let structures = [
         ]
     },
     {
-        name: 'novia11', // TODO: no concuerda??
+        name: 'novia11',
         components: [
-            {literal:'que a tu novia la conozcan en el barrio como', probability: 1},
+            {type:'queATu', probability: 1},
             {
                 name:'basico10',
                 probability: 1,
                 caseData: {
-                    gender: 'f',
-                    isPlural: false,
                     concrete: true,
                 }
             },
@@ -194,7 +196,22 @@ let structures = [
             {random: true, options:[0,1], probability: 1, quoted: true},
             {literal:'?', probability: 1},
         ]
-    }
+    },
+    {
+        name: 'full16',
+        components: [
+            {type:'article', probability: 1},
+            {type:'sustantive', probability: 1},
+            {literal:'full', probability: 1},
+            {
+                type:'sustantive',
+                probability: 1,
+                caseData: {
+                    isPlural: false,
+                }
+            },
+        ]
+    },
 ];
 
 let happenings = [];
@@ -279,7 +296,15 @@ let generateOc = ({structure, gender, doPluralize, caseData, quoted}) => {
                     isFirstComponent,
                 });
             } else {
-                if (type === 'adverb') {
+                if (type === 'queATu') {
+                    let {
+                        queATu,
+                        queATuGender,
+                    } = generateQueATu();
+                    element = queATu;
+                    gender = queATuGender;
+                    doPluralize = false;
+                } else if (type === 'adverb') {
                     element = generateAdverb({ happenings });
                 } else if (type === 'article') {
                     let concrete = caseData && caseData.concrete !== undefined ? caseData.concrete : true;
@@ -294,6 +319,15 @@ let generateOc = ({structure, gender, doPluralize, caseData, quoted}) => {
                     doPluralize = isPlural;
                 } else if (type === 'verbGerund') {
                     element = generateVerbGerund({happenings});
+                } else if (type === 'verbInfinitive') {
+                    let { verbInfinitive } = generateVerbInfinitive({happenings});
+                    element = verbInfinitive;
+                } else if (type === 'transitiveVerbInfinitive') {
+                    let { verbInfinitive } = generateTransitiveVerbInfinitive({happenings});
+                    element = verbInfinitive;
+                } else if (type === 'intransitiveVerbInfinitive') {
+                    let { verbInfinitive } = generateIntransitiveVerbInfinitive({happenings});
+                    element = verbInfinitive;
                 } else if (type === 'verbTe') {
                     element = generateVerbTe({happenings});
                 } else if (type === 'sustantivizedAdjective') {
@@ -340,15 +374,15 @@ let generateOc = ({structure, gender, doPluralize, caseData, quoted}) => {
 let iterations = 100;
 
 let allowedStructures = [
-    0,1,2,3,4,5,6,7,8,11,12,13,14,15,
+    0,1,2,3,4,5,6,7,8,11,12,13,14,15,16,
 ];
 
 let fileContent = '';
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
     let generatedOc = generateOc({structure: structures[randomType]});
-    let result = `${randomType} ${capitalizeFirstLetter(generatedOc)}`;
-    console.log(result);
+    let result = capitalizeFirstLetter(generatedOc);
+    console.log(`${randomType} ${result}`);
     fileContent += `${result}\n`;
 }
 

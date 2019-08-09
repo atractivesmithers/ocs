@@ -16,19 +16,49 @@ let {
     addRandomLevel,
     te,
     mangleWord,
+    isTransitive,
+    hasCharacteristic,
 } = require('./utils');
 
 const generateVerbInfinitive = ({happenings}) => {
-    // TODO: add more metadata to verbs. objeto directo, objeto indirecto?
-    let verbInfinitive = getUniqueElement({ happenings, type: 'verbInfinitive' });
-    return verbInfinitive;
+    let element = getUniqueElement({ happenings, type: 'verbInfinitive' });
+    let characteristics = element.match(/\[([^)]+)\]/)[1].split(',');
+    let verbInfinitive = element.split('[')[0];
+    return {
+        verbInfinitive,
+        characteristics,
+    };
+}
+
+const generateVerbInfinitiveWithCharacteristic = ({happenings, characteristic}) => {
+    let fulfillsCondition;
+    let verb;
+    let verbCharacteristics;
+    while (fulfillsCondition !== true) {
+        const { verbInfinitive, characteristics } = generateVerbInfinitive({ happenings });
+        fulfillsCondition = hasCharacteristic({characteristics, characteristic});
+        verb = verbInfinitive;
+        verbCharacteristics = characteristics;
+    }
+    return {
+        verbInfinitive: verb,
+        characteristics: verbCharacteristics,
+    };
+}
+
+const generateTransitiveVerbInfinitive = ({happenings}) => {
+    return generateVerbInfinitiveWithCharacteristic({ happenings, characteristic: 'trans'});
+}
+
+const generateIntransitiveVerbInfinitive = ({happenings}) => {
+    return generateVerbInfinitiveWithCharacteristic({ happenings, characteristic: 'intrans'});
 }
 
 const generateVerbGerund = ({happenings}) => {
-    let verbInfinitive = generateVerbInfinitive({ happenings });
+    const { verbInfinitive, characteristics } = generateVerbInfinitive({ happenings });
     let verbGerund = makeInfinitiveVerbGerund(verbInfinitive);
-    if (withProbability(0.3)) {
-    	if (withProbability(0.6)) {
+    if (withProbability(0.3) && hasCharacteristic({characteristics, characteristic: 'trans'})) {
+    	if (withProbability(0.3)) {
 	        let verbParticle = getUniqueElement({ happenings, type: 'verbParticle' });
 	        verbGerund = `${verbGerund} ${verbParticle}`;
 	    }
@@ -37,7 +67,7 @@ const generateVerbGerund = ({happenings}) => {
 	        sustantiveGender,
 	        isPlural,
 	    } = generateSustantive({happenings});
-        verbGerund = `${verbGerund} ${sustantive}`;
+        verbGerund = `${verbGerund} ${sustantive}`; // TODO: this only if transitive!!!
     }
     if (withProbability(0.3)) {
         let adverb;
@@ -79,7 +109,7 @@ const generateSustantivizedAdjective = ({happenings}) => {
 const generateVerbTe = ({happenings}) => {
     let fumarte = withProbability(0.2);
     if (fumarte) return te('fumar');
-    let verbInfinitive = generateVerbInfinitive({ happenings });
+    let { verbInfinitive, characteristics } = generateTransitiveVerbInfinitive({ happenings });
     return te(verbInfinitive);
 }
 
@@ -186,7 +216,7 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
     let isDizo = withProbability(0.06);
     if (isDizo) {
         adjectiveGender = gender || getRandomGender();
-        let verbInfinitive = generateVerbInfinitive({ happenings });
+        let { verbInfinitive, characteristics } = generateVerbInfinitive({ happenings });
         adjective = diz({ verb: verbInfinitive, gender: adjectiveGender, doPluralize });
         if (doLevel) {
             adjective = addRandomLevel(adjective);
@@ -259,6 +289,26 @@ const generateGube = () => {
     return `${gube}${gubeEnding}`;
 }
 
+const generateQueATu = () => {
+    let queATus = {
+        old: {
+            m: 'marido',
+            f: 'esposa',
+        },
+        young: {
+            m: 'novio',
+            f: 'novia',
+        }
+    };
+    let queATuGender = withProbability(0.3) ? 'm' : 'f';
+    let queATuAge = withProbability(0.3) ? 'old' : 'young';
+    let queATu = `que a tu ${queATus[queATuAge][queATuGender]} ${queATuGender === 'm' ? 'lo' : 'la'} conozcan en el barrio como`;
+    return {
+        queATu,
+        queATuGender,
+    };
+}
+
 module.exports = {
 	generateVerbGerund,
 	generateSustantivizedAdjective,
@@ -268,4 +318,8 @@ module.exports = {
     generateAdverb,
     generateVerbTe,
     generateGube,
+    generateVerbInfinitive,
+    generateTransitiveVerbInfinitive,
+    generateIntransitiveVerbInfinitive,
+    generateQueATu,
 };

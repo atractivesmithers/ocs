@@ -201,7 +201,7 @@ const makeInfinitiveVerbGerund = verb => {
     }
     if (endsWithEnding({word: verb, ending: 'ir'})) {
         verb = removeLastChar(verb);
-        if (verb[1] === 'e') {
+        if (verb[1] === 'e' && verb[0] !== 'd') {
             verb = replaceAt({word: verb, i: 1, replacement: 'i'});
         }
         return `${verb}endo`;
@@ -256,6 +256,14 @@ const writeToFile = ({ name, content }) => {
     });
 }
 
+const isTransitive = characteristics => {
+    return hasCharacteristic({characteristics, characteristic: 'trans'});
+}
+
+const hasCharacteristic = ({characteristics, characteristic}) => {
+    return characteristics.indexOf(characteristic) > -1;
+}
+
 module.exports = {
 	isVocal,
 	pluralize,
@@ -279,4 +287,6 @@ module.exports = {
     addRandomLevel,
     te,
     writeToFile,
+    isTransitive,
+    hasCharacteristic,
 };

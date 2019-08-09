@@ -27,7 +27,8 @@ let sustantive = [
     'Baltasar(m)', 'corito(m)', 'mango(m)', 'cuscús(m)', 'yay(o|a)','doctor(|a)','abogad(o|a)',
     'mirada(f)', 'beso(m)', 'grito(m)', 'reunión(f)', 'mermelada(f)', 'horchata(f)',
     'gueriller(o|a)', 'juez(|)', 'DS(f)', 'iPhone(m)', 'basilisco(m)', 'nodo(m)', 'budell(m)',
-    'Kuwabara(m)', 'guava(f)', 'nevera(f)'
+    'Kuwabara(m)', 'guava(f)', 'nevera(f)', 'margarina(f)', 'rodaja(f)', 'navaja(f)',
+    'pistola(f)', 'platebody(m)'
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -48,7 +49,7 @@ let adjective = [
     'invisible', 'apestos(o|a)', 'ingrávid(o|a)', 'maj(o|a)', 'simpátic(o|a)', 'agradable',
     'desagradable', 'arcaic(o|a)', 'futurista', 'estudios(o|a)', 'dur(o|a)', 'bland(o|a)',
     'racista', 'sexista', 'capacitista', 'paulatin(o|a)', 'esmaltad(o|a)', 'indomable',
-    'parmesan(o|a)',
+    'parmesan(o|a)', 'sayan', 'caramelos(o|a)', 'lubricad(o|a)', 'pegajos(o|a)',
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -57,23 +58,33 @@ let place = [
     'el Macdonals', 'el barrio', 'la calle', 'el Sonar', 'Sarriá', 'Gracia', 'Vic',
     'la cocina', 'el desierto', 'la zona', 'la Bola Negra', 'la trap house', 'Plaza Castilla',
     'Badalona', 'un huequito', 'la plaza de toros', 'el Condis', 'el Carrefur',
-    'el 24'
+    'el 24', 'Hospitalet', 'urgencias'
 ];
+// intrans. no tienen objeto
+// trans. tienen objeto
 let verbInfinitive = [
-    'comer[]', 'rapar', 'discriminar', 'amar', 'fisgar', 'lamer', 'defenestrar', 'luchar',
-    'bailar', 'follar', 'especiar', 'cocinar', 'lamer', 'beber', 'untar', 'esperar',
-    'soñar', 'flirtear', 'pajear', 'descubrir', 'filtrar', 'ver', 'espiar', 'tumbar',
-    'alterar', 'imprimir', 'almorzar', 'lubricar', 'boostear', 'frenar', 'muscular',
-    'fruncir', 'olisquear', 'vomitar', 'esnifar', 'clavar', 'menear', 'mear', 'follar',
-    'chamuscar', 'amarrar', 'fundir', 'glotonear', 'castrar', 'asar', 'gritar', 'mojar',
-    'secar', 'marinar', 'gettear', 'blastear', 'salpimentar', 'exprimir', 'calibrar',
-    'masturbar', 'hundir', 'sucar', 'driblar', 'asar', 'silbar', 'esnifar', 'oler',
-    'pelar', 'cascar', 'gozar', 'wildear', 'booliar', 'mentir', 'arrimar', 'reflexionar',
-    'pelear', 'mascar', 'lamer', 'rockear', 'peinar', 'arreglar', 'ballear', 'escupir', 
-    'gatear', 'explorar', 'ignorar', 'volar', 'planear', 'jugar', 'pintar', 'rescatar',
-    'esperar', 'quemar', 'cincelar', 'operar', 'rendir', 'fallar', 'afinar', 'esculpir',
-    'producir', 'droppear', 'agenciar', 'disparar', 'goler', 'macerar', 'biselar',
-    'marcar', 'lavar', 'manchar', 'hervir',
+    'comer[trans]', 'rapar[trans]', 'discriminar[trans]', 'amar[trans]', 'fisgar[intrans]',
+    'lamer[trans]', 'defenestrar[trans]', 'bailar[trans]', 'follar[trans]', 'esperar[trans]',
+    'especiar[trans]', 'cocinar[trans]', 'lamer[trans]', 'beber[trans]', 'untar[trans]',
+    'soñar[trans]', 'flirtear[intrans]', 'pajear[trans]', 'descubrir[trans]', 'filtrar[trans]',
+    'ver[trans]', 'espiar[trans]', 'tumbar[trans]', 'alterar[trans]', 'imprimir[trans]',
+    'almorzar[trans]', 'lubricar[trans]', 'boostear[trans]', 'frenar[trans]', 'muscular[trans]',
+    'fruncir[trans]', 'olisquear[trans]', 'vomitar[trans]', 'esnifar[trans]', 'clavar[trans]',
+    'menear[trans]', 'mear[trans]', 'follar[trans]', 'chamuscar[trans]', 'amarrar[trans]',
+    'fundir[trans]', 'glotonear[intrans]', 'castrar[trans]', 'asar[trans]', 'gritar[trans]',
+    'mojar[trans]', 'secar[trans]', 'marinar[trans]', 'gettear[trans]', 'blastear[trans]',
+    'salpimentar[trans]', 'exprimir[trans]', 'calibrar[trans]', 'masturbar[trans]', 
+    'hundir[trans]', 'sucar[trans]', 'driblar[intrans]', 'asar[trans]', 'silbar[trans]',
+    'esnifar[trans]', 'oler[trans]', 'pelar[trans]', 'cascar[trans]', 'gozar[intrans]',
+    'wildear[intrans]', 'booliar[intrans]', 'mentir[intrans]', 'reflexionar[intrans]',
+    'pelear[intrans]', 'mascar[trans]', 'lamer[trans]', 'rockear[intrans]', 'peinar[trans]',
+    'arreglar[trans]', 'ballear[intrans]', 'escupir[trans]', 'gatear[intrans]', 'explorar[trans]',
+    'ignorar[trans]', 'volar[intrans]', 'planear[intrans]', 'jugar[intrans]', 'pintar[trans]',
+    'rescatar[trans]', 'esperar[trans]', 'quemar[trans]', 'cincelar[trans]', 'operar[trans]',
+    'rendir[intrans]', 'fallar[intrans]', 'afinar[trans]', 'esculpir[trans]', 'producir[trans]',
+    'droppear[trans]', 'agenciar[trans]', 'disparar[trans]', 'goler[intrans]', 'macerar[trans]',
+    'biselar[trans]', 'marcar[trans]', 'lavar[trans]', 'manchar[trans]', 'hervir[trans]',
+    'luchar[intrans]', 'doblar[trans]', 'impedir[trans]'
 ];
 let verbParticle = [
     'contra', 'con', 'a', 'en', 'sobre', 'sin', 'bajo', 'desde', 'hasta'
