@@ -28,7 +28,11 @@ let sustantive = [
     'mirada(f)', 'beso(m)', 'grito(m)', 'reunión(f)', 'mermelada(f)', 'horchata(f)',
     'gueriller(o|a)', 'juez(|)', 'DS(f)', 'iPhone(m)', 'basilisco(m)', 'nodo(m)', 'budell(m)',
     'Kuwabara(m)', 'guava(f)', 'nevera(f)', 'margarina(f)', 'rodaja(f)', 'navaja(f)',
-    'pistola(f)', 'platebody(m)'
+    'pistola(f)', 'platebody(m)', 'yeyu(m)', 'café(m)', 'nutier(m)', 'fuet(m)',
+    'estofado(m)', 'guardián(m)', 'vigilante(|)', 'polilla(f)', 'D\'Artagnan', 'galleta(f)',
+    'vagón(m)', 'zumo(m)', 'carpaccio(m)', 'chupete(m)', 'vibrador(m)', 'estaca(f)',
+    'cruz(f)', 'llanura(f)', 'pantano(m)', 'isla(f)', 'bosque(m)', 'montaña(f)',
+
 ];
 let adjective = [
     'pinchad(o|a)', 'hinchad(o|a)', 'canos(o|a)', 'aliñad(o|a)', 'gord(o|a)', 'lent(o|a)',
@@ -49,7 +53,9 @@ let adjective = [
     'invisible', 'apestos(o|a)', 'ingrávid(o|a)', 'maj(o|a)', 'simpátic(o|a)', 'agradable',
     'desagradable', 'arcaic(o|a)', 'futurista', 'estudios(o|a)', 'dur(o|a)', 'bland(o|a)',
     'racista', 'sexista', 'capacitista', 'paulatin(o|a)', 'esmaltad(o|a)', 'indomable',
-    'parmesan(o|a)', 'sayan', 'caramelos(o|a)', 'lubricad(o|a)', 'pegajos(o|a)',
+    'parmesan(o|a)', 'sayan', 'caramelos(o|a)', 'lubricad(o|a)', 'pegajos(o|a)', 'enorme',
+    'diminut(o|a)', 'oriental', 'otaku', 'delicios(o|a)', 'apetecible', 'sensual', 'atent(o|a)',
+    'discret(o|a)', 'refrescante'
 ];
 let place = [
     'Diamant', 'Chaus', 'Bangladesh', 'el circo', 'Sabadell', 'Calafell', 'Irlanda',
@@ -58,7 +64,7 @@ let place = [
     'el Macdonals', 'el barrio', 'la calle', 'el Sonar', 'Sarriá', 'Gracia', 'Vic',
     'la cocina', 'el desierto', 'la zona', 'la Bola Negra', 'la trap house', 'Plaza Castilla',
     'Badalona', 'un huequito', 'la plaza de toros', 'el Condis', 'el Carrefur',
-    'el 24', 'Hospitalet', 'urgencias'
+    'el 24', 'Hospitalet', 'urgencias', 'Urquinaona', 'el medio del mar', 
 ];
 // intrans. no tienen objeto
 // trans. tienen objeto
@@ -84,10 +90,13 @@ let verbInfinitive = [
     'rendir[intrans]', 'fallar[intrans]', 'afinar[trans]', 'esculpir[trans]', 'producir[trans]',
     'droppear[trans]', 'agenciar[trans]', 'disparar[trans]', 'goler[intrans]', 'macerar[trans]',
     'biselar[trans]', 'marcar[trans]', 'lavar[trans]', 'manchar[trans]', 'hervir[trans]',
-    'luchar[intrans]', 'doblar[trans]', 'impedir[trans]'
+    'luchar[intrans]', 'doblar[trans]', 'impedir[trans]', 'dificultar[trans]', 'merodear[intrans]',
+    'permitir[trans]', 'prohibir[trans]', 'avinagrar[trans]', 'fermentar[trans]', 'urdir[trans]',
+    'especificar[trans]', 'implementar[trans]', 'cagar[trans]', 'calentar[trans]',
+    'enfriar[trans]'
 ];
 let verbParticle = [
-    'contra', 'con', 'a', 'en', 'sobre', 'sin', 'bajo', 'desde', 'hasta'
+    'contra', 'con', 'a', 'en', 'sobre', 'sin', 'bajo', 'desde', 'hasta', 'por',
 ];
 let adverb = [
     'lento', 'de puta madre', 'fatal', 'genial', 'rápido', 'con prisa', 'de chill',
@@ -100,7 +109,7 @@ let adverbParticle = [
 ];
 let level = [
     'muy', 'poco', 'ligeramente', 'extremadamente', 'intensamente', 'sorprendentemente',
-    'brutalmente', 'inesperadamente', 'fuertemente',
+    'brutalmente', 'inesperadamente', 'fuertemente', 'bien', 'super', 'mega',
 ];
 
 let gube = [

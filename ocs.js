@@ -193,7 +193,7 @@ let structures = [
                     a: true,
                 }
             },
-            {random: true, options:[0,1,16], probability: 1, quoted: true},
+            {random: true, options:[0,0,1,1,16], probability: 1, quoted: true},
             {literal:'?', probability: 1},
         ]
     },
@@ -209,6 +209,16 @@ let structures = [
                     isPlural: false,
                 }
             },
+        ]
+    },
+    {
+        name: 'quesi17',
+        components: [
+            {literal:'que si', probability: 1},
+            {random: true, options:[0,1], probability: 1},
+            {literal:', que si', probability: 1},
+            {random: true, options:[0,1], probability: 1},
+            {literal:'... yo que sé mi bro', probability: 1},
         ]
     },
 ];
@@ -374,6 +384,7 @@ let iterations = 100;
 
 let allowedStructures = [
     0,1,2,3,4,5,6,7,8,11,12,13,14,15,16,
+    // 17
 ];
 
 let fileContent = '';

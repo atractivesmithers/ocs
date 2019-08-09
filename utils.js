@@ -65,7 +65,8 @@ const removeTilde = word => {
 }
 
 const pluralize = sustantive => {
-    if (endsWith({ word: sustantive, char:'k' })) {
+    if (endsWith({ word: sustantive, char:'k' }) ||
+        endsWith({ word: sustantive, char:'y' })) {
         return `${sustantive}s`;
     }
 	if (lastChar(sustantive) === 'z') return `${removeLastChar(sustantive)}ces`;
@@ -86,6 +87,10 @@ const diminutive = ({ word, gender }) => {
 		return `${word}`;
 	}
     word = removeTilde(word);
+    if (endsWithEnding({word, ending: 'io'})) {
+        word = removeLastNChars({word, n: 2});
+        return `${word}${ending}`;
+    }
     if (endsWithEnding({word, ending: 'ia'})) {
         word = removeLastChar(word);
         return `${word}${ending}`;

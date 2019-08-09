@@ -40,6 +40,11 @@ assert({
     val: () => pluralize('arcén'),
     expected: 'arcenes',
 });
+assert({
+    name: 'pluralize McCarthy',
+    val: () => pluralize('McCarthy'),
+    expected: 'McCarthys',
+});
 
 
 // diminutive //
@@ -58,6 +63,16 @@ assert({
     name: 'make corito diminute',
     val: () => diminutive({word: 'corito', gender: 'm'}),
     expected: 'corito',
+});
+assert({
+    name: 'make garfio diminute',
+    val: () => diminutive({word: 'garfio', gender: 'm'}),
+    expected: 'garfito',
+});
+assert({
+    name: 'make alicate diminute',
+    val: () => diminutive({word: 'alicate', gender: 'm'}),
+    expected: 'alicatito',
 });
 
 // makeInfinitiveVerbGerund //

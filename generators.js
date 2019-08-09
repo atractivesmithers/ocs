@@ -254,8 +254,8 @@ const generateAdjective = ({happenings, gender, doPluralize}) => {
 
 const generateAdverb = ({happenings}) => {
     let adverb;
-    let buildAdverb = withProbability(0.5);
-    let mente = withProbability(0.5);
+    let buildAdverb = withProbability(0.4);
+    let mente = withProbability(0.4);
     if (buildAdverb) {
         // TODO: gendered adverb particles
         // the sustantive generated here should be singular, for example, for 'a lo'.
