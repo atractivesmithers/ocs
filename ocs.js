@@ -4,7 +4,7 @@ let {
     getUniqueElement,
     withProbability,
     getRandomGender,
-    capitalizeFirstLetter,
+    makeOcPretty,
     writeToFile,
 } = require('./utils');
 let words = require('./data');
@@ -193,14 +193,13 @@ let structures = [
                     a: true,
                 }
             },
-            {random: true, options:[0,1], probability: 1, quoted: true},
+            {random: true, options:[0,1,16], probability: 1, quoted: true},
             {literal:'?', probability: 1},
         ]
     },
     {
         name: 'full16',
         components: [
-            {type:'article', probability: 1},
             {type:'sustantive', probability: 1},
             {literal:'full', probability: 1},
             {
@@ -381,7 +380,7 @@ let fileContent = '';
 for (let i = 0; i < iterations; i++) {
     let randomType = getRandomItem(allowedStructures);
     let generatedOc = generateOc({structure: structures[randomType]});
-    let result = capitalizeFirstLetter(generatedOc);
+    let result = makeOcPretty(generatedOc);
     console.log(`${randomType} ${result}`);
     fileContent += `${result}\n`;
 }

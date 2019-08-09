@@ -32,6 +32,9 @@ const startsWithBeginning = ({word, beginning}) => {
 const removeFirstChar = word => {
     return word.substr(1);
 }
+const removeFirstTwoChars = word => {
+    return word.substr(2);
+}
 const removeLastNChars = ({word, n}) => {
 	return word.slice(0, -n);
 }
@@ -104,7 +107,12 @@ const diminutive = ({ word, gender }) => {
     return `${endsWithVocal(word) ? removeLastChar(word) : word}${ending}`;
 }
 
-const capitalizeFirstLetter = word => {
+const makeOcPretty = word => {
+    if(word[0] === '¿') {
+        word = word.replace('¿ ', '¿');
+        word = word.replace(' ?', '?');
+        return `${word[0]}${word[1].toUpperCase()}${removeFirstTwoChars(word)}`;
+    }
     return `${word[0].toUpperCase()}${removeFirstChar(word)}`;
 }
 
@@ -276,7 +284,7 @@ module.exports = {
 	diminutive,
     eo,
     getRandomNumber,
-    capitalizeFirstLetter,
+    makeOcPretty,
     endsWithEnding,
     getElementWithGender,
     makeInfinitiveVerbGerund,
